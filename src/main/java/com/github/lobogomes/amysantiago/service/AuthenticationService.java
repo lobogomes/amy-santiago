@@ -5,5 +5,5 @@ import com.github.lobogomes.amysantiago.payload.response.RegisterResponse;
 import org.springframework.http.ResponseEntity;
 
 public interface AuthenticationService {
-    ResponseEntity<RegisterResponse> registerUser(RegisterRequest registerRequest);
+  ResponseEntity<RegisterResponse> registerUser(RegisterRequest registerRequest);
 }

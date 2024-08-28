@@ -6,8 +6,8 @@ import com.github.lobogomes.amysantiago.service.AuthenticationService;
 import org.springframework.http.ResponseEntity;
 
 public class AuthenticationServiceImpl implements AuthenticationService {
-    @Override
-    public ResponseEntity<RegisterResponse> registerUser(RegisterRequest request) {
-        return null;
-    }
+  @Override
+  public ResponseEntity<RegisterResponse> registerUser(RegisterRequest request) {
+    return null;
+  }
 }
