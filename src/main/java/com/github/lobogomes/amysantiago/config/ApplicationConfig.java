@@ -1,4 +1,4 @@
-package com.github.lobogomes.amysantiago.configuration;
+package com.github.lobogomes.amysantiago.config;
 
 import com.github.lobogomes.amysantiago.exception.ResourceNotFoundException;
 import com.github.lobogomes.amysantiago.repository.UserRepository;
@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
-public class ApplicationConfiguration {
+public class ApplicationConfig {
   private final UserRepository userRepository;
 
   @Bean

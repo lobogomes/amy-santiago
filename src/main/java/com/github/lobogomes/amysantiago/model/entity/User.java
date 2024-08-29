@@ -25,10 +25,10 @@ public class User implements Serializable, UserDetails {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(nullable = false)
+  @Column(name = "user_id", nullable = false)
   private Long id;
 
-  @Column(nullable = false)
+  @Column(name = "full_name", nullable = false)
   private String fullName;
 
   @Column(unique = true, length = 100, nullable = false)
@@ -40,11 +40,13 @@ public class User implements Serializable, UserDetails {
   @Enumerated(EnumType.STRING)
   private RoleEnum role;
 
-  @Column(updatable = false, name = "created_at")
+  @Column(name = "created_at", updatable = false)
   private LocalDate createdAt;
 
   @Column(name = "updated_at")
   private LocalDate updatedAt;
+
+  private Boolean isVerified;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
