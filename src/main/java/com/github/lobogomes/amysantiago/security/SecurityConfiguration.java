@@ -1,6 +1,7 @@
 package com.github.lobogomes.amysantiago.security;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -8,16 +9,16 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfiguration {
+  private final AuthenticationProvider authenticationProvider;
+  private final JwtAuthenticationFilter jwtAuthenticationFilter;
   private static final String[] SWAGGER_WHITELIST = {
     "/v3/api-docs/**",
     "/swagger-ui/**",
@@ -30,33 +31,24 @@ public class SecurityConfiguration {
     "/error/*",
     "/"
   };
-  private final AuthenticationEntryPoint authenticationEntryPoint;
-  private final JwtAuthenticationFilter jwtAuthenticationFilter;
-  private final AuthenticationProvider authenticationProvider;
 
   @Bean
-  MvcRequestMatcher.Builder mvc(HandlerMappingIntrospector introspector) {
-    return new MvcRequestMatcher.Builder(introspector);
-  }
-
-  @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http, MvcRequestMatcher.Builder mvc)
-      throws Exception {
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    log.info("Configuring SecurityFilterChain");
     http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             auth ->
-                auth.requestMatchers(mvc.pattern("/api/v1/auth/**"))
+                auth.requestMatchers(SWAGGER_WHITELIST)
                     .permitAll()
-                    .requestMatchers(SWAGGER_WHITELIST)
+                    .requestMatchers("**/auth/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
-        .exceptionHandling(e -> e.authenticationEntryPoint(authenticationEntryPoint))
         .sessionManagement(
             session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .authenticationProvider(authenticationProvider);
-
+        .authenticationProvider(authenticationProvider)
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+    log.info("Finished Configuring SecurityFilterChain");
     return http.build();
   }
 }

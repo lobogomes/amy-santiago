@@ -13,22 +13,22 @@ import java.util.Properties;
 @EnableRetry
 @EnableAsync
 public class MailConfig {
-    @Bean
-    public JavaMailSender mailSender() {
-        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
+  @Bean
+  public JavaMailSender mailSender() {
+    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+    mailSender.setHost("smtp.gmail.com");
+    mailSender.setPort(587);
 
-        mailSender.setUsername("8lobogomes@gmail.com");
-        mailSender.setPassword("tjbyxzseurfllwrm");
+    mailSender.setUsername("8lobogomes@gmail.com");
+    mailSender.setPassword("tjbyxzseurfllwrm");
 
-        Properties props = mailSender.getJavaMailProperties();
-        props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.starttls.required", "true");
-        props.put("mail.debug", "true");
+    Properties props = mailSender.getJavaMailProperties();
+    props.put("mail.transport.protocol", "smtp");
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
+    props.put("mail.smtp.starttls.required", "true");
+    props.put("mail.debug", "true");
 
-        return mailSender;
-    }
+    return mailSender;
+  }
 }
