@@ -2,12 +2,11 @@ package com.github.lobogomes.amysantiago.service.impl;
 
 
 import com.github.lobogomes.amysantiago.constants.ApplicationConstants;
+import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
-
-import java.util.Random;
 
 @Service
 @RequiredArgsConstructor

@@ -1,11 +1,10 @@
 package com.github.lobogomes.amysantiago.service;
 
 import jakarta.mail.MessagingException;
+import java.util.concurrent.CompletableFuture;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.scheduling.annotation.Async;
-
-import java.util.concurrent.CompletableFuture;
 
 public interface EmailService {
   @Async

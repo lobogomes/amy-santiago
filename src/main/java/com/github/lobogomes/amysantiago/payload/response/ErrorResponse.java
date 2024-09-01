@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RegisterResponse {
+public class ErrorResponse {
+  private int code;
+  private String error;
   private String message;
 }

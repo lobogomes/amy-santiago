@@ -1,7 +1,7 @@
 package com.github.lobogomes.amysantiago.controller;
 
 import com.github.lobogomes.amysantiago.payload.request.RegisterRequest;
-import com.github.lobogomes.amysantiago.payload.response.RegisterResponse;
+import com.github.lobogomes.amysantiago.payload.response.GeneralAPIResponse;
 import com.github.lobogomes.amysantiago.service.AuthenticationService;
 import com.github.lobogomes.amysantiago.service.impl.JwtServiceImpl;
 import jakarta.validation.Valid;
@@ -19,13 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class AuthController {
 
-    private final AuthenticationService authService;
-    private final JwtServiceImpl jwtService;
+  private final AuthenticationService authService;
+  private final JwtServiceImpl jwtService;
 
-    @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest request){
-        log.info("Register request received for email: {}", request.getEmail());
-        return authService.registerUser(request);
-    }
+  @PostMapping("/register")
+  public ResponseEntity<GeneralAPIResponse> register(@Valid @RequestBody RegisterRequest request) {
+    log.info("Register request received for email: {}", request.getEmail());
+    return authService.registerUser(request);
+  }
 }
-

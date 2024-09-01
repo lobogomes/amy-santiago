@@ -10,16 +10,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @OpenAPIDefinition(
-        info = @Info(title = "amy-santiago-api", version = "v1"),
-        security = @SecurityRequirement(name = "bearer token")
-)
+    info = @Info(title = "amy-santiago-api", version = "v1"),
+    security = @SecurityRequirement(name = "bearer token"))
 @SecurityScheme(
-        name = "bearer token",
-        type = SecuritySchemeType.HTTP,
-        bearerFormat = "JWT",
-        scheme = "bearer",
-        in = SecuritySchemeIn.HEADER
-)
-public class OpenAPIConfig {
-
-}
+    name = "bearer token",
+    type = SecuritySchemeType.HTTP,
+    bearerFormat = "JWT",
+    scheme = "bearer",
+    in = SecuritySchemeIn.HEADER)
+public class OpenAPIConfig {}
